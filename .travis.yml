@@ -19,7 +19,7 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
-    condition: "$DEBUG = true"
+    condition: $DEBUG = true
 deploy:
   provider: releases
   api_key: $OUATH_KEY
@@ -27,6 +27,6 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
-    condition: "$DEBUG = false"
+    condition: $DEBUG = false
 script:
 - "./gradlew build assembleDebug -PenableDebug=${DEBUG}"
