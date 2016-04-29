@@ -30,6 +30,20 @@ android {
             } else {
                 debuggable true // default setting
             }
+
+            // Delete unsigned and unaligned apk's
+            android.applicationVariants.all { variant ->
+                variant.assemble.doLast {
+                    variant.outputs.each { output ->
+                        File unaligned = output.packageApplication.outputFile;
+                        if (!unaligned.getName().equalsIgnoreCase("app-debug.apk") ||
+                                !unaligned.getName().equalsIgnoreCase("app-QA.apk")) {
+                            unaligned.delete()
+                        }
+
+                    }
+                }
+            }
         }
     }
 }
