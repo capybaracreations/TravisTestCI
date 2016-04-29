@@ -1,3 +1,7 @@
+env:
+  matrix:
+    - DEBUG=true
+    - DEBUG=false
 language: android
 android:
   components:
@@ -11,9 +15,10 @@ android:
 deploy:
   provider: releases
   api_key: $OUATH_KEY
-  file: $TRAVIS_BUILD_DIR/app/build/outputs/apk/app-debug.apk
+  file: if [ ${DEBUG} = true ]; then $TRAVIS_BUILD_DIR/app/build/outputs/apk/app-debug.apk
+  file: if [ ${DEBUG} = false ]; then $TRAVIS_BUILD_DIR/app/build/outputs/apk/app-QA.apk
   skip_cleanup: true
   on:
     tags: true
 script:
-- "./gradlew build assembleDebug -PenableDebug=true"
+- "./gradlew build assembleDebug -PenableDebug=${DEBUG}"
