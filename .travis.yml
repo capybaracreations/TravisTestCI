@@ -15,18 +15,10 @@ android:
 deploy:
   provider: releases
   api_key: $OUATH_KEY
-  file: $TRAVIS_BUILD_DIR/app/build/outputs/apk/app-debug.apk
+  file_glob: true
+  file: "{$TRAVIS_BUILD_DIR}/app/build/outputs/apk/app-*.apk"
   skip_cleanup: true
   on:
     tags: true
-    condition: $DEBUG = true
-deploy:
-  provider: releases
-  api_key: $OUATH_KEY
-  file: $TRAVIS_BUILD_DIR/app/build/outputs/apk/app-QA.apk
-  skip_cleanup: true
-  on:
-    tags: true
-    condition: $DEBUG = false
 script:
 - "./gradlew build assembleDebug -PenableDebug=${DEBUG}"
