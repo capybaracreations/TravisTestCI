@@ -1,7 +1,9 @@
-env:
-  matrix:
-    - env: DEBUG=true FILE_NAME="app-debug.apk"
-    - env: DEBUG=true FILE_NAME="app-QA.apk"
+matrix:
+  include:
+    - language: android
+      env: DEBUG=true FILE_NAME="app-debug.apk"
+    - language: android
+      env: DEBUG=true FILE_NAME="app-QA.apk"
 language: android
 android:
   components:
