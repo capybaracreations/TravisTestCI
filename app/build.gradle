@@ -16,6 +16,13 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            if (project.hasProperty("enableDebug")) {
+                debuggable Boolean.valueOf(project['enableDebug'])
+            } else {
+                debuggable true // default setting
+            }
+        }
     }
 }
 
