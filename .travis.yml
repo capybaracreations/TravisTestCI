@@ -1,9 +1,7 @@
-matrix:
-  include:
-    - language: android
-      env: DEBUG=true FILE_NAME="app-debug.apk"
-    - language: android
-      env: DEBUG=true FILE_NAME="app-QA.apk"
+env:
+  matrix:
+    - DEBUG=true
+    - DEBUG=false
 language: android
 android:
   components:
@@ -18,7 +16,7 @@ deploy:
   provider: releases
   api_key: $OUATH_KEY
   file_glob: true
-  file: "{$TRAVIS_BUILD_DIR}/app/build/outputs/apk/{$FILE_NAME}"
+  file: "{$TRAVIS_BUILD_DIR}/app/build/outputs/apk/app-*.apk"
   skip_cleanup: true
   on:
     tags: true
