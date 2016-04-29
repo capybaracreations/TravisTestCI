@@ -19,6 +19,14 @@ android {
         debug {
             if (project.hasProperty("enableDebug")) {
                 debuggable Boolean.valueOf(project['enableDebug'])
+                if (!Boolean.valueOf(project['enableDebug'])) {
+                    applicationVariants.all { variant ->
+                        variant.outputs.each { output ->
+                            def file = output.outputFile
+                            output.outputFile = new File(file.parent, file.name.replace("debug.apk", "QA.apk"))
+                        }
+                    }
+                }
             } else {
                 debuggable true // default setting
             }
